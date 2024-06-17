@@ -145,7 +145,7 @@ def init_webdriver():
         def get_driver():
             return webdriver.Chrome(
                 service=Service(
-                    ChromeDriverManager(driver_version='120',chrome_type=ChromeType.CHROMIUM).install()
+                    ChromeDriverManager(driver_version='121',chrome_type=ChromeType.CHROMIUM).install()
                 ),
                 options=options,
             )
