@@ -30,18 +30,27 @@ def scrape_and_download():
     page_source = browser.page_source
 
     # Saving the page source to a file
-    with open("page_content.html", "w", encoding='utf-8') as file:
+    file_path = "page_content.html"
+    with open(file_path, "w", encoding='utf-8') as file:
         file.write(page_source)
 
     browser.quit()
 
-    return page_title, "page_content.html"
+    return page_title, file_path
 
 if st.button('Scrape and Download'):
     st.write('Scraping in progress...')
     page_title, file_path = scrape_and_download()
     st.write(f'Page Title: {page_title}')
-    st.write(f'Content saved to {file_path}')
     st.write('Scraping done.')
+
+    with open(file_path, "r", encoding='utf-8') as file:
+        file_content = file.read()
+        st.download_button(
+            label="Download Page Content",
+            data=file_content,
+            file_name="page_content.html",
+            mime="text/html"
+        )
 else:
     st.write('Click the button to scrape the page.')
